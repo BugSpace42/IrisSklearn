@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 
 iris = load_iris()
 
@@ -38,3 +39,6 @@ knn.fit(X_train, y_train)
 print("\nМодель обучена")
 print(f"Параметры модели: {knn.get_params()}")
 
+y_pred = knn.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"\nТочность модели: {accuracy:.2f}")
