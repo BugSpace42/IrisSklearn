@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 
 iris = load_iris()
 
@@ -23,3 +24,17 @@ print(f"\nРазмер обучающей выборки: {X_train.shape}")
 print(f"Размер тестовой выборки: {X_test.shape}")
 print(f"Распределение классов в обучающей выборке: {np.bincount(y_train)}")
 print(f"Распределение классов в тестовой выборке: {np.bincount(y_test)}")
+
+knn = KNeighborsClassifier(
+    n_neighbors=5,
+    weights='uniform',
+    algorithm='auto',
+    metric='minkowski',
+    p=2
+)
+
+knn.fit(X_train, y_train)
+
+print("\nМодель обучена")
+print(f"Параметры модели: {knn.get_params()}")
+
