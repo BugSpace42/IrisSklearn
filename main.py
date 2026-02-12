@@ -3,7 +3,8 @@ import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import matplotlib.pyplot as plt
 
 iris = load_iris()
 
@@ -42,3 +43,15 @@ print(f"Параметры модели: {knn.get_params()}")
 y_pred = knn.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"\nТочность модели: {accuracy:.2f}")
+
+# Матрица ошибок
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+plt.title('Матрица ошибок')
+plt.xlabel('Предсказанный класс')
+plt.ylabel('Истинный класс')
+plt.show()
+
+# Classification report
+print("\nОтчет по классификации:")
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
